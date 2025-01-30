@@ -36,7 +36,7 @@ class EnemyManager extends Component with KnowsGameSize, HasGameRef<Starlance> {
     // Center the enemy
     enemy.anchor = Anchor.center;
     // Add the enemy to the game
-    add(enemy);
+    gameRef.add(enemy);
   }
 
   // When the component is mounted (added to the game tree)

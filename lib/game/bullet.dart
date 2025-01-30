@@ -1,7 +1,9 @@
+import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
+import 'package:starlance/game/enemy.dart';
 
 /// A bullet shot by the player.
-class Bullet extends SpriteComponent {
+class Bullet extends SpriteComponent with CollisionCallbacks {
   /// The speed at which the bullet moves.
   double speed = 450;
 
@@ -20,6 +22,21 @@ class Bullet extends SpriteComponent {
           size: size,
           position: position,
         );
+
+  //implementing collision detection
+  @override
+  void onMount() {
+    super.onMount();
+    add(CircleHitbox());
+  }
+
+  @override
+  void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
+    if (other is Enemy) {
+      removeFromParent();
+    }
+    super.onCollision(intersectionPoints, other);
+  }
 
   @override
 
